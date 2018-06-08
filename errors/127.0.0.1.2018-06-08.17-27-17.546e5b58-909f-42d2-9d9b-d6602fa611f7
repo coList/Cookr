@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.SyntaxError'> define_table argument is not a Field or Table: %(name)s"
+p3
+sS'layer'
+p4
+S'E:\\Studium\\SoSe2018\\web2py\\applications\\Cookr\\models\\db1.py'
+p5
+sS'code'
+p6
+S'<code object <module> at 0678DA88, file "E:\\Studium\\SoSe2018\\web2py\\applications\\Cookr\\models\\db1.py", line 3>'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "E:\\Studium\\SoSe2018\\web2py\\gluon\\restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "E:\\Studium\\SoSe2018\\web2py\\applications\\Cookr\\models\\db1.py", line 11, in <module>\n    db.define_table(\'difficulty\', Field(\'name\', \'string\', requires=[IS_NOT_EMPTY(), IS_NOT_IN_DB(db, \'difficulty.name\')]), format(\'%(name)s\'))\n  File "E:\\Studium\\SoSe2018\\web2py\\gluon\\packages\\dal\\pydal\\base.py", line 586, in define_table\n    table = self.lazy_define_table(tablename, *fields, **args)\n  File "E:\\Studium\\SoSe2018\\web2py\\gluon\\packages\\dal\\pydal\\base.py", line 598, in lazy_define_table\n    table = table_class(self, tablename, *fields, **args)\n  File "E:\\Studium\\SoSe2018\\web2py\\gluon\\packages\\dal\\pydal\\objects.py", line 318, in __init__\n    field\nSyntaxError: define_table argument is not a Field or Table: %(name)s\n'
+p11
+s.

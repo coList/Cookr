@@ -3,6 +3,11 @@
     {{=recipe.title}}
 </h1>
 
+{{if auth.user:}}
+{{if recipe.writer.id == auth.user.id:}}
+{{=A('Bearbeiten', _class='btn', _href=URL(args=recipe.id))}}
+{{pass}}
+{{pass}}
 {{if recipe.description is not "":}}
 <h2>
     Beschreibung
@@ -81,7 +86,7 @@
 
 {{for row in steps:}}
 <h3>
-    Schritt {{=row.stepnumber}}
+    Schritt {{=row.stepNumber}}
 </h3>
 
 {{=row.instruction}}

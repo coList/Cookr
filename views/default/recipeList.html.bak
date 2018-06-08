@@ -7,6 +7,13 @@
     Filter
 </h2>
 
+
+<p>
+    {{for row in categories:}}
+    {{=row}} 
+    {{pass}}
+</p>
+
 <table>
     <thead>
         <tr>
@@ -22,8 +29,9 @@
         {{for row in recipes:}}
         <tr>
             <td>
-                <!--<a href="{{=URL('showIngredient', args=row.id)}}">-->
-                {{=row.title}}
+                <a href="{{=URL('showRecipe', args=row.id)}}">
+                    {{=row.title}}
+                </a>
             </td>
             <td>
                 {{=row.description}}

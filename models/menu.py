@@ -7,7 +7,7 @@
 
 response.menu = [
     (T('Home'), False, URL('default', 'index'), []),
-    (T('Alle Rezepte'), False, URL('default', 'recipeList'), []),
+    (T('Alle Rezepte'), False, URL('default', 'recipeList', args=(0)), []),
     (T('Eigene Rezepte verwalten'), False, URL('default', 'manageRecipes'), []),
     (T('Neues Rezept'), False, URL('default', 'newRecipe'), []),
 ]

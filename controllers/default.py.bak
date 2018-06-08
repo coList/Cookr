@@ -4,10 +4,11 @@
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
 
-# ---- example index page ----
+# http://hostname/Cookr/default/index
 def index():
     return locals()
 
+# http://hostname/Cookr/default/newRecipe
 @auth.requires_login()
 def newRecipe():
     newRecipeForm = SQLFORM(db.recipe).process()
@@ -16,25 +17,49 @@ def newRecipe():
     
     currentIngredients = db(db.ingredient).select()
     
-    if newRecipeForm.accepted: redirect(URL('showRecipe'))
+    if newRecipeForm.accepted: redirect(URL('showRecipe', args=(newRecipeForm.vars.id)))
     return locals()
 
+# http://hostname/Cookr/default/recipeList/<page>
 def recipeList():
-    recipes = db(db.recipe).select()
+    RECIPES_PER_PAGE = 2
+    page = request.args(0, cast=int)
+    
+    startValue = page * RECIPES_PER_PAGE
+    endValue = page * RECIPES_PER_PAGE + RECIPES_PER_PAGE
+    
+    categories = db(db.category).select()
+    recipes = db(db.recipe).select(limitby=(startValue, endValue))
+    
     #ingredients = db(db.ingredient).select()
     return locals()
 
+# http://hostname/Cookr/default/showIngredient/<ingredient.id>
 def showIngredient():
     ingredient = db.ingredient(request.args(0, cast=int))
     return locals()
 
+# http://hostname/Cookr/default/showRecipe/<recipe.id>
 def showRecipe():
     recipe = db.recipe(request.args(0, cast=int))
     items = db(db.recipeContainsItem.recipe == recipe.id).select()
     ingredients = db(db.recipeContainsIngredient.recipe == recipe.id).select()
-    steps = db(db.recipe_step.recipe == recipe.id).select(orderby = db.recipe_step.stepnumber)
+    steps = db(db.recipe_step.recipe == recipe.id).select(orderby = db.recipe_step.stepNumber)
     return locals()
 
+# http://hostname/Cookr/default/editRecipe/<recipe.id>
+def editRecipe():
+    id = request.args(0, cast=int)
+    recipeForm = SQLFORM(db.recipe, id).process(next=URL('showRecipe', args=id))
+    return locals()
+
+# Click on "Bearbeiten"/"Edit" Button: redirect to editRecipe/<recipe.id>
+def editRecipeButton():
+    redirect(URL('editRecipe', args=(4), vars=()))
+    return "Edit"
+
+# http://hostname/Cookr/default/manageRecipes
+# shows all own recipes -> edit and delete them easily
 @auth.requires_login()
 def manageRecipes():
     recipesGrid = SQLFORM.grid(db.recipe.writer == auth.user.id)
