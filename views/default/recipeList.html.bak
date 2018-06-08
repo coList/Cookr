@@ -1,0 +1,36 @@
+{{extend 'layout.html'}}
+<h1>
+    Rezepte
+</h1>
+
+<h2>
+    Filter
+</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>
+                Rezeptname
+            </td>
+            <td>
+                Beschreibung
+            </td>
+        </tr>
+    </thead>
+    <tfoot>
+        {{for row in recipes:}}
+        <tr>
+            <td>
+                <!--<a href="{{=URL('showIngredient', args=row.id)}}">-->
+                {{=row.title}}
+            </td>
+            <td>
+                {{=row.description}}
+            </td>
+        </tr>
+        {{pass}}
+    </tfoot>
+    
+    
+</table>

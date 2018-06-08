@@ -1,0 +1,6 @@
+{{extend 'layout.html'}}
+<form>
+    Neues Rezept erstellen
+    <input name="title"/>
+    <input type="submit"/>
+</form>

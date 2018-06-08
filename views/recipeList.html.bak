@@ -1,0 +1,32 @@
+{{extend 'layout.html'}}
+<h1>
+    Rezepte
+</h1>
+
+<h2>
+    Filter
+</h2>
+
+<table>
+    <thead>
+        <tr>
+            Rezeptname
+        </tr>
+
+        <tr>
+            Beschreibung
+        </tr>
+    </thead>
+    <tfoot>
+        {{for row in ingredients:}}
+        <tr>
+            {{=row.name}}
+        </tr>
+        <tr>
+            {{=row.description}}
+        </tr>
+        {{pass}}
+    </tfoot>
+    
+    
+</table>

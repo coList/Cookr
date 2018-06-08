@@ -1,0 +1,12 @@
+{{extend 'layout.html'}}
+<h1>
+    {{=ingredient.name}}
+</h1>
+
+
+{{if ingredient.description is "":}}
+<h2>
+    Beschreibung
+</h2>
+{{=ingredient.description}}
+{{pass}}

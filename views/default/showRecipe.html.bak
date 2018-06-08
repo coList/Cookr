@@ -1,0 +1,89 @@
+{{extend 'layout.html'}}
+<h1>
+    {{=recipe.title}}
+</h1>
+
+{{if recipe.description is not "":}}
+<h2>
+    Beschreibung
+</h2>
+{{=recipe.description}}
+{{pass}}
+
+<p>
+    Erstellt am: {{=recipe.creationDate}} von {{=recipe.writer.username}}
+</p>
+
+<p>
+    <b>Schwierigkeit: </b> {{=recipe.difficulty.name}}
+</p>
+<p>
+    <b>Kosten: </b> {{=recipe.priceCategory.name}}
+</p>
+
+<p>
+    <b>Kategorie: </b> {{=recipe.category.name}}
+</p>
+
+<p>
+    <b>Art: </b> {{=recipe.origin.name}}
+</p>
+
+<p>
+   <b>Dauer: </b> {{=recipe.duration}} Minuten
+</p>
+
+<p>
+    <b>Zutaten für {{=recipe.forAmountOfPeople}} Personen</b>
+</p>
+
+
+
+<h2>
+    Benötigte Gegenstände:
+</h2>
+
+
+<table>
+        {{for row in items:}}
+        <tr>
+            
+            <td>{{=row.item.name}}</td>
+        </tr>
+        {{pass}}
+</table>
+
+<h2>
+    Benötigte Zutaten:
+</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>Menge</td>
+            <td>Zutat</td>
+        </tr>
+    </thead>
+    <tfoot>
+        {{for row in ingredients:}}
+        <tr>
+            <td>{{=row.amount}} {{=row.measurement.name}}</td>
+            <td>{{=row.ingredient.name}}</td>
+        </tr>
+        {{pass}}
+    </tfoot>
+    
+</table>
+
+<h2>
+    Anleitung:
+</h2>
+
+{{for row in steps:}}
+<h3>
+    Schritt {{=row.stepnumber}}
+</h3>
+
+{{=row.instruction}}
+
+{{pass}}
