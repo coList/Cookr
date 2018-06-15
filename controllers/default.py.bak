@@ -4,6 +4,9 @@
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
 
+
+
+    
 # http://hostname/Cookr/default/index
 def index():
     return locals()
@@ -17,21 +20,56 @@ def newRecipe():
     
     currentIngredients = db(db.ingredient).select()
     
+    #redirect to http://hostname/default/showRecipe/<recipe.id>
     if newRecipeForm.accepted: redirect(URL('showRecipe', args=(newRecipeForm.vars.id)))
     return locals()
 
 # http://hostname/Cookr/default/recipeList/<page>
 def recipeList():
-    RECIPES_PER_PAGE = 2
+    RECIPES_PER_PAGE = 5
+    
     page = request.args(0, cast=int)
     
     startValue = page * RECIPES_PER_PAGE
     endValue = page * RECIPES_PER_PAGE + RECIPES_PER_PAGE
     
     categories = db(db.category).select()
-    recipes = db(db.recipe).select(limitby=(startValue, endValue))
+    recipes = db(db.recipe).select(orderby=db.recipe.title, limitby=(startValue, endValue))
+    
     
     #ingredients = db(db.ingredient).select()
+    return locals()
+
+# http://hostname/Cookr/default/categoryRecipeList/<categoryId>/<page>
+def categoryRecipeList():
+    RECIPES_PER_PAGE = 5
+    
+    categoryId = request.args(0) 
+    page = request.args(1, cast = int)
+    
+    startValue = page * RECIPES_PER_PAGE
+    endValue = page * RECIPES_PER_PAGE + RECIPES_PER_PAGE
+    
+    recipes = db(db.recipe.category == categoryId).select(orderby = db.recipe.title, limitby = (startValue, endValue))
+    
+    category = db(db.category.id == categoryId).select()
+    categoryName = category[0].name
+    return locals()
+
+
+# http://hostname/Cookr/default/originRecipeList/<originId>/<page>
+def originRecipeList():
+    RECIPES_PER_PAGE = 5
+    
+    originId = request.args(0)
+    page = request.args(1, cast = int)
+    
+    startValue = page * RECIPES_PER_PAGE
+    endValue = page * RECIPES_PER_PAGE + RECIPES_PER_PAGE
+    
+    recipes = db(db.recipe.origin == originId).select(orderby = db.recipe.title, limitby = (startValue, endValue))
+    
+    originName = db(db.origin == originId).select()
     return locals()
 
 # http://hostname/Cookr/default/showIngredient/<ingredient.id>
@@ -47,16 +85,18 @@ def showRecipe():
     steps = db(db.recipe_step.recipe == recipe.id).select(orderby = db.recipe_step.stepNumber)
     return locals()
 
+
+
+def randomRecipe():
+    return 'Zeige zufälliges Rezept'
+
 # http://hostname/Cookr/default/editRecipe/<recipe.id>
 def editRecipe():
     id = request.args(0, cast=int)
     recipeForm = SQLFORM(db.recipe, id).process(next=URL('showRecipe', args=id))
     return locals()
 
-# Click on "Bearbeiten"/"Edit" Button: redirect to editRecipe/<recipe.id>
-def editRecipeButton():
-    redirect(URL('editRecipe', args=(4), vars=()))
-    return "Edit"
+
 
 # http://hostname/Cookr/default/manageRecipes
 # shows all own recipes -> edit and delete them easily

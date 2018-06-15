@@ -10,7 +10,7 @@
 
 <p>
     {{for row in categories:}}
-    {{=row}} 
+    {{=row.name}} 
     {{pass}}
 </p>
 
@@ -39,6 +39,20 @@
         </tr>
         {{pass}}
     </tfoot>
-    
-    
 </table>
+
+{{if page > 0:}}
+<a href="{{=URL('recipeList', args = page - 1)}}">
+    <button>
+        Zurück
+    </button>
+</a>
+{{pass}}
+
+{{if len(recipes) >= RECIPES_PER_PAGE:}}
+<a href="{{=URL('recipeList', args=page + 1)}}">
+    <button>
+        Weiter
+    </button>
+</a>
+{{pass}}

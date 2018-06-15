@@ -1,18 +1,7 @@
 {{extend 'layout.html'}}
 <h1>
-    Rezepte
+    {{=originName}}e Gerichte
 </h1>
-
-<h2>
-    Filter
-</h2>
-
-
-<p>
-    {{for row in categories:}}
-    {{=row.name}}
-    {{pass}}
-</p>
 
 <table>
     <thead>
@@ -30,7 +19,7 @@
         <tr>
             <td>
                 <a href="{{=URL('showRecipe', args=row.id)}}">
-                    {{=row.title}}
+                    {{=row.title}}    {{=row.origin.name}}
                 </a>
             </td>
             <td>
@@ -42,7 +31,7 @@
 </table>
 
 {{if page > 0:}}
-<a href="{{=URL('recipeList', args = page - 1)}}">
+<a href="{{=URL('originRecipeList', args = (originId, page - 1))}}">
     <button>
         Zurück
     </button>
@@ -50,7 +39,7 @@
 {{pass}}
 
 {{if len(recipes) >= RECIPES_PER_PAGE:}}
-<a href="{{=URL('recipeList', args=page + 1)}}">
+<a href="{{=URL('originRecipeList', args = (originId, page + 1))}}">
     <button>
         Weiter
     </button>

@@ -7,7 +7,16 @@
 
 response.menu = [
     (T('Home'), False, URL('default', 'index'), []),
-    (T('Alle Rezepte'), False, URL('default', 'recipeList'), []),
+    (T('Alle Rezepte'), False, URL('default', 'recipeList', args=(0)), []),
     (T('Eigene Rezepte verwalten'), False, URL('default', 'manageRecipes'), []),
     (T('Neues Rezept'), False, URL('default', 'newRecipe'), []),
+    (T('Rezepte von A bis Z'), False, URL('default', 'recipeList', args=(0)), [])
 ]
+
+categoriesAmount = db(db.category).count()
+
+items = []
+for row in db(db.category).select():
+    items.append((T(row.name), False, URL('default', 'categoryRecipeList', args=(row.id, 0)), []))
+
+response.menu.append((T('Rezepte nach Kategorien'), False, None, items))
