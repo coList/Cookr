@@ -1,4 +1,17 @@
 {{extend 'layout.html'}}
+{{response.files.append(URL('static','css/index.css'))}}
 <h1>
     Startseite
 </h1>
+
+<a href="{{=URL('recipeList', args = 0)}}">
+    <button class="mainButton">
+        Rezepte von A bis Z
+    </button>
+</a>
+
+<a href="{{=URL('newRecipe')}}">
+    <button class="mainButton">
+        Neues Rezept erstellen
+    </button>
+</a>

@@ -3,7 +3,7 @@
 # This is a sample controller
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
-
+from pydal.helpers.methods import smart_query
 
 
     
@@ -40,6 +40,24 @@ def recipeList():
     #ingredients = db(db.ingredient).select()
     return locals()
 
+
+
+
+
+# http://hostname/Cookr/default/search
+def search():
+    #list_of_searchable_fields = [db.category.name, db.origin.name, db.recipe.title]
+    #query = smart_query(list_of_searchable_fields, search_text)
+    #rows = db(query).select()
+    
+    rows = []
+    searchKeyword = request.vars["search"]
+    if searchKeyword != None and searchKeyword != "":
+        list_of_searchable_fields = [db.recipe.title, db.category.name]
+        query = smart_query(list_of_searchable_fields, searchKeyword).select()
+        rows = db(query).select()
+    return locals()
+
 # http://hostname/Cookr/default/categoryRecipeList/<categoryId>/<page>
 def categoryRecipeList():
     RECIPES_PER_PAGE = 5
@@ -69,7 +87,8 @@ def originRecipeList():
     
     recipes = db(db.recipe.origin == originId).select(orderby = db.recipe.title, limitby = (startValue, endValue))
     
-    originName = db(db.origin == originId).select()
+    origin = db(db.origin.id == originId).select()
+    originName = origin[0].name
     return locals()
 
 # http://hostname/Cookr/default/showIngredient/<ingredient.id>

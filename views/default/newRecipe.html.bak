@@ -10,29 +10,3 @@
     Zutat hinzufügen
 </h2>
 {{=addIngredientForm}}
-
-
-<h2>
-   Vorhandene Zutaten
-</h2>
-
-<table>
-    <thead>
-        <tr>
-            <td>
-                Name
-            </td>
-            <td>
-                Beschreibung
-            </td>
-        </tr>
-    </thead>
-    <tfoot>
-        {{for row in currentIngredients:}}
-        <tr>
-            <td>{{=row.name}}</td>
-            <td>{{=row.description}}</td>
-        </tr>
-        {{pass}}
-    </tfoot>
-</table>

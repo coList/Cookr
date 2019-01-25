@@ -1,19 +1,30 @@
 {{extend 'layout.html'}}
+<div class = "content">
+
 <h1>
     {{=recipe.title}}
 </h1>
 
 {{if auth.user:}}
 {{if recipe.writer.id == auth.user.id:}}
-{{=A('Bearbeiten', _class='btn', _href=URL('editRecipe', args=recipe.id))}}
+    <a href="{{=URL('editRecipe', args=recipe.id)}}">
+    <button class="mainButton">
+        Bearbeiten
+    </button>
+</a>
 {{pass}}
 {{pass}}
 {{if recipe.description is not "":}}
 <h2>
     Beschreibung
 </h2>
+
+
+<div class = "partDiv">
+    
 {{=recipe.description}}
 {{pass}}
+
 
 <p>
     Erstellt am: {{=recipe.creationDate}} von {{=recipe.writer.username}}
@@ -26,13 +37,18 @@
     <b>Kosten: </b> {{=recipe.priceCategory.name}}
 </p>
 
+{{if recipe.category != None:}}
 <p>
     <b>Kategorie: </b> {{=recipe.category.name}}
 </p>
+{{pass}}
 
+    
+{{if recipe.origin != None:}}
 <p>
     <b>Art: </b> {{=recipe.origin.name}}
 </p>
+{{pass}}
 
 <p>
    <b>Dauer: </b> {{=recipe.duration}} Minuten
@@ -42,53 +58,27 @@
     <b>Zutaten für {{=recipe.forAmountOfPeople}} Personen</b>
 </p>
 
-
-
-<h2>
-    Benötigte Gegenstände:
-</h2>
-
-
-<table>
-        {{for row in items:}}
-        <tr>
-            
-            <td>{{=row.item.name}}</td>
-        </tr>
-        {{pass}}
-</table>
+</div>
+{{if recipe.image != "":}}
+    <img src="{{=URL('default', 'download', args=recipe.image)}}" class="showRecipeImage"/>
+    {{pass}}
 
 <h2>
     Benötigte Zutaten:
 </h2>
 
-<table>
-    <thead>
-        <tr>
-            <td>Menge</td>
-            <td>Zutat</td>
-        </tr>
-    </thead>
-    <tfoot>
-        {{for row in ingredients:}}
-        <tr>
-            <td>{{=row.amount}} {{=row.measurement.name}}</td>
-            <td>{{=row.ingredient.name}}</td>
-        </tr>
-        {{pass}}
-    </tfoot>
-    
-</table>
+<div class = "partDiv">
+  {{=XML(recipe.ingredients.replace('\n','<br />'))}}
+    </div>
 
 <h2>
     Anleitung:
 </h2>
 
-{{for row in steps:}}
-<h3>
-    Schritt {{=row.stepNumber}}
-</h3>
+<div class="partDiv">
+{{=XML(recipe.instructions.replace('\n','<br />'))}} 
+</div>
 
-{{=row.instruction}}
-
-{{pass}}
+    
+        
+</div>

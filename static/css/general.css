@@ -1,0 +1,86 @@
+body {
+    background-color: #cfcfcf;
+}
+
+h1 {
+    color: #22cb01;
+    font-weight: bold;
+    padding: 0 0 20 0;
+    
+}
+
+h2 {
+    color: black;
+    font-weight: bold;
+    padding: 0 0 20 0;
+}
+
+.listTable {
+  padding: 50 50 50 50 ;
+}
+
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:nth-child(odd) {
+    background-color: #e5e5e5;
+}
+
+
+.tileButton {
+    border-color: #4CAF50;
+    border-style: solid;
+    border-width: 5px;
+    background-color: #22cb01;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.mainButton {
+    border-color: #4CAF50;
+    border-style: solid;
+    border-width: 3px;
+    background-color: #22cb01;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.partDiv {
+    background-color: white;
+    display: inline-block;
+    max-width: 800px;
+    padding: 5px 10px;
+    border-color: #4CAF50;
+    border-width: 3px;
+}
+
+.showRecipeImage {
+    width: 800px;
+    height: auto;
+    float: right;
+}
+
+.listRecipeImage {
+    width: 300px;
+    height: auto;
+}
+
+.noListRecipeImage {
+    width: 300px;
+    height: 200px;
+    background-color: #4CAF50;
+}

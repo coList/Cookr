@@ -39,7 +39,7 @@ db.define_table('item',
 
 
 db.define_table('recipe',
-                Field('writer', 'reference auth_user'),
+                Field('writer', 'reference auth_user', default = auth.user, writable = False, readable = False),
                 Field('category', 'reference category', label = 'Kategorie'),
                 Field('difficulty', 'reference difficulty', label = 'Schwierigkeit', orderby = 'difficulty.id'),
                 Field('priceCategory', 'reference priceCategory', label = 'Kosten', orderby = db.priceCategory.id),
@@ -48,9 +48,12 @@ db.define_table('recipe',
                 Field('duration', 'integer', label = 'Dauer'),
                 Field('forAmountOfPeople', 'integer', label = 'Für Anzahl an Personen'),
                 Field('creationDate', 'date', default = now, writable = False, readable = False),
-                Field('description', 'text', label = 'Beschreibung'))
+                Field('description', 'text', label = 'Beschreibung'),
+                Field('ingredients', 'text', label = 'Zutaten'),
+                Field('instructions', 'text', label = 'Anleitung'),
+                Field('image', 'upload', label = 'Titelbild'))
 
-
+#For later progress
 db.define_table('recipe_step',
                 Field('recipe', db.recipe, requires = [IS_NOT_EMPTY(), IS_IN_DB(db, 'recipe.id')]),
                 Field('stepNumber', 'integer', requires = [IS_NOT_EMPTY()]),

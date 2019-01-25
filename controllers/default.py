@@ -3,7 +3,7 @@
 # This is a sample controller
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
-
+from pydal.helpers.methods import smart_query
 
 
     
@@ -33,11 +33,28 @@ def recipeList():
     startValue = page * RECIPES_PER_PAGE
     endValue = page * RECIPES_PER_PAGE + RECIPES_PER_PAGE
     
-    categories = db(db.category).select()
     recipes = db(db.recipe).select(orderby=db.recipe.title, limitby=(startValue, endValue))
     
     
     #ingredients = db(db.ingredient).select()
+    return locals()
+
+
+
+
+
+# http://hostname/Cookr/default/search
+def search():
+    #list_of_searchable_fields = [db.category.name, db.origin.name, db.recipe.title]
+    #query = smart_query(list_of_searchable_fields, search_text)
+    #rows = db(query).select()
+    
+    rows = []
+    searchKeyword = request.vars["search"]
+    if searchKeyword != None and searchKeyword != "":
+        list_of_searchable_fields = [db.recipe.title, db.category.name]
+        query = smart_query(list_of_searchable_fields, searchKeyword).select()
+        rows = db(query).select()
     return locals()
 
 # http://hostname/Cookr/default/categoryRecipeList/<categoryId>/<page>
@@ -82,8 +99,8 @@ def showIngredient():
 def showRecipe():
     recipe = db.recipe(request.args(0, cast=int))
     items = db(db.recipeContainsItem.recipe == recipe.id).select()
-    ingredients = db(db.recipeContainsIngredient.recipe == recipe.id).select()
-    steps = db(db.recipe_step.recipe == recipe.id).select(orderby = db.recipe_step.stepNumber)
+    #ingredients = db(db.recipeContainsIngredient.recipe == recipe.id).select()
+    #steps = db(db.recipe_step.recipe == recipe.id).select(orderby = db.recipe_step.stepNumber)
     return locals()
 
 

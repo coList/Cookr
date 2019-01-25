@@ -1,36 +1,17 @@
 {{extend 'layout.html'}}
-
+{{response.files.append(URL('static','css/index.css'))}}
 <h1>
-    Neues Rezept erstellen
+    Startseite
 </h1>
-{{=newRecipeForm}}
 
-<h2>
-    Zutat hinzufügen
-</h2>
-{{=addIngredientForm}}
+<a href="{{=URL('recipeList', args = 0)}}">
+    <button>
+        Rezepte von A bis Z
+    </button>
+</a>
 
-<h2>
-   Vorhandene Zutaten
-</h2>
-
-<table>
-    <thead>
-        <tr>
-            <td>
-                Name
-            </td>
-            <td>
-                Beschreibung
-            </td>
-        </tr>
-    </thead>
-    <tfoot>
-        {{for row in currentIngredients:}}
-        <tr>
-            <td>{{=row.name}}</td>
-            <td>{{=row.description}}</td>
-        </tr>
-        {{pass}}
-    </tfoot>
-</table>
+<a href="{{=URL('newRecipe')}}">
+    <button>
+        Neues Rezept erstellen
+    </button>
+</a>
