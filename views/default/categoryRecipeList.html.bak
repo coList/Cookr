@@ -6,20 +6,32 @@
 <table>
     <thead>
         <tr>
-            <td>
+            <th>Bild
+            </th>
+            <th>
                 Rezeptname
-            </td>
-            <td>
+            </th>
+            <th>
                 Beschreibung
-            </td>
+            </th>
         </tr>
     </thead>
     <tfoot>
         {{for row in recipes:}}
         <tr>
             <td>
+               
                 <a href="{{=URL('showRecipe', args=row.id)}}">
-                    {{=row.title}}    {{=row.category.name}}
+                     {{if row.image != "":}}
+                <img src="{{=URL('default', 'download', args=row.image)}}" class="listRecipeImage"/>
+                    {{else:}}
+                    <div class="noListRecipeImage"></div>
+                {{pass}}
+                </a>
+            </td>
+            <td>
+                <a href="{{=URL('showRecipe', args=row.id)}}">
+                    {{=row.title}} 
                 </a>
             </td>
             <td>
@@ -31,7 +43,7 @@
 </table>
 
 {{if page > 0:}}
-<a href="{{=URL('categoryRecipeList', args = (categoryName, page - 1))}}">
+<a href="{{=URL('categoryRecipeList', args = (categoryId, page - 1))}}">
     <button>
         Zurück
     </button>
@@ -39,7 +51,7 @@
 {{pass}}
 
 {{if len(recipes) >= RECIPES_PER_PAGE:}}
-<a href="{{=URL('categoryRecipeList', args = (categoryName, page + 1))}}">
+<a href="{{=URL('categoryRecipeList', args = (categoryId, page + 1))}}">
     <button>
         Weiter
     </button>

@@ -1,0 +1,81 @@
+{{extend 'layout.html'}}
+<h1>Zu Wochentag hinzufügen</h1>
+
+<table>
+    <tfoot>
+        <tr>
+            <td>
+                Montag
+            </td>
+            <td>
+                Dienstag
+            </td>
+            <td>
+                Mittwoch
+            </td>
+            <td>
+                Donnerstag
+            </td>
+            <td>
+                Freitag
+            </td>
+            <td>
+                Samstag
+            </td>
+            <td>
+                Sonntag
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{if usersWeekplan and monday:}}
+                    Montagsrezept
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and tuesday:}}
+                    Dienstagrezept
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and wednesday:}}
+                    Mittwochrezept
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and thursday:}}
+                    Donnerstagrezept
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+               {{if usersWeekplan and friday:}}
+                    Freitagrezept
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and saturday:}}
+                    Samstagrezept
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and sunday:}}
+                    Sonntagrezept
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+        </tr>
+    </tfoot>
+</table>

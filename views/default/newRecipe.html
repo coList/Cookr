@@ -3,10 +3,18 @@
 <h1>
     Neues Rezept erstellen
 </h1>
-{{=newRecipeForm}}
 
-
-<h2>
-    Zutat hinzufügen
-</h2>
-{{=addIngredientForm}}
+{{=newRecipeForm.custom.begin}}
+Titel: <div>{{=newRecipeForm.custom.widget.title}}</div>
+Beschreibung: <div>{{=newRecipeForm.custom.widget.description}}</div>
+Zutaten: <div>{{=newRecipeForm.custom.widget.ingredients}}</div>
+Anleitung: <div>{{=newRecipeForm.custom.widget.instructions}}</div>
+Kategorie: <div>{{=newRecipeForm.custom.widget.category}}</div>
+Schwierigkeit: <div>{{=newRecipeForm.custom.widget.difficulty}}</div>
+Kosten: <div>{{=newRecipeForm.custom.widget.priceCategory}}</div>
+Herkunftsland: <div>{{=newRecipeForm.custom.widget.origin}}</div>
+Dauer: <div>{{=newRecipeForm.custom.widget.duration}}</div>
+Personenzahl: <div>{{=newRecipeForm.custom.widget.forAmountOfPeople}}</div>
+Titelbild: <div>{{=newRecipeForm.custom.widget.image}}</div>
+{{=newRecipeForm.custom.submit}}
+{{=newRecipeForm.custom.end}}

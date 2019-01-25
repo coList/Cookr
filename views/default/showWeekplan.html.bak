@@ -1,0 +1,120 @@
+{{extend 'layout.html'}}
+<h1>Mein Wochenplan</h1>
+
+<table class="weekPlanTable">
+    <tfoot>
+        <tr>
+            <td>
+                Montag
+            </td>
+            <td>
+                Dienstag
+            </td>
+            <td>
+                Mittwoch
+            </td>
+            <td>
+                Donnerstag
+            </td>
+            <td>
+                Freitag
+            </td>
+            <td>
+                Samstag
+            </td>
+            <td>
+                Sonntag
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{if usersWeekplan and monday:}}
+                    <a href = "{{=URL('showRecipe', args = monday.id)}}">
+                        {{=monday.title}}
+                    </a>
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and tuesday:}}
+                    {{=tuesday.title}}
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and wednesday:}}
+                    {{=wednesday.title}}
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and thursday:}}
+                    {{=thursday.title}}
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+               {{if usersWeekplan and friday:}}
+                    {{=friday.title}}
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and saturday:}}
+                    {{=saturday.title}}
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and sunday:}}
+                    {{=sunday.title}}
+                {{else:}}
+                    Noch kein Plan vorhanden
+                {{pass}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{if usersWeekplan and monday and monday.image != "":}}
+                    <img src="{{=URL('default', 'download', args=monday.image)}}" class="listRecipeImage"/>
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and tuesday and tuesday.image != "":}}
+                   <img src="{{=URL('default', 'download', args=tuesday.image)}}" class="listRecipeImage"/>
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and wednesday and wednesday.image != "":}}
+                    <img src="{{=URL('default', 'download', args=wednesday.image)}}" class="listRecipeImage"/>
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and thursday and thursday.image != "":}}
+                    <img src="{{=URL('default', 'download', args=thursday.image)}}" class="listRecipeImage"/>
+                {{pass}}
+            </td>
+            <td>
+               {{if usersWeekplan and friday and friday.image != "":}}
+                    <img src="{{=URL('default', 'download', args=friday.image)}}" class="listRecipeImage"/>
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and saturday and saturday.image != "":}}
+                    <img src="{{=URL('default', 'download', args=saturday.image)}}" class="listRecipeImage"/>
+                {{pass}}
+            </td>
+            <td>
+                {{if usersWeekplan and sunday and sunday.image != "":}}
+                    <img src="{{=URL('default', 'download', args=sunday.image)}}" class="listRecipeImage"/>
+                {{pass}}
+            </td>
+        </tr>
+    </tfoot>
+</table>

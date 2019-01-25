@@ -6,20 +6,32 @@
 <table>
     <thead>
         <tr>
-            <td>
+            <th>
+                Bild
+            </th>
+            <th>
                 Rezeptname
-            </td>
-            <td>
+            </th>
+            <th>
                 Beschreibung
-            </td>
+            </th>
         </tr>
     </thead>
     <tfoot>
         {{for row in recipes:}}
         <tr>
             <td>
+                 <a href="{{=URL('showRecipe', args=row.id)}}">
+                      {{if row.image != "":}}
+                <img src="{{=URL('default', 'download', args=row.image)}}" class="listRecipeImage"/>
+                    {{else:}}
+                    <div class="noListRecipeImage"></div>
+                {{pass}}
+                </a>
+            </td>
+            <td>
                 <a href="{{=URL('showRecipe', args=row.id)}}">
-                    {{=row.title}}    {{=row.origin.name}}
+                    {{=row.title}}
                 </a>
             </td>
             <td>

@@ -1,0 +1,187 @@
+{{extend 'layout.html'}}
+<h1>Zu meinem Wochenplan hinzufügen: {{=recipe.title}}</h1>
+
+
+<form>
+    <table class="weekPlanTable">
+        <tfoot>
+            <tr>
+                <td>
+                    <input type="radio" name="weekday" value="monday">
+                </td>
+                <td>
+                    <input type="radio" name="weekday" value="tuesday">
+                </td>
+                <td>
+                    <input type="radio" name="weekday" value="wednesday">
+                </td>
+                <td>
+                    <input type="radio" name="weekday" value="thursday">
+                </td>
+                <td>
+                    <input type="radio" name="weekday" value="friday">
+                </td>
+                <td>
+                    <input type="radio" name="weekday" value="saturday">
+                </td>
+                <td>
+                    <input type="radio" name="weekday" value="sunday">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Montag
+                </td>
+                <td>
+                    Dienstag
+                </td>
+                <td>
+                    Mittwoch
+                </td>
+                <td>
+                    Donnerstag
+                </td>
+                <td>
+                    Freitag
+                </td>
+                <td>
+                    Samstag
+                </td>
+                <td>
+                    Sonntag
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{if usersWeekplan and monday:}}
+                        <a href = "{{=URL('showRecipe', args = monday.id)}}">
+                            {{=monday.title}}
+                        </a>
+                    {{else:}}
+                        Noch kein Plan vorhanden
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and tuesday:}}
+                        <a href = "{{=URL('showRecipe', args = tuesday.id)}}">
+                            {{=tuesday.title}}
+                        </a>
+                    {{else:}}
+                        Noch kein Plan vorhanden
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and wednesday:}}
+                        <a href = "{{=URL('showRecipe', args = wednesday.id)}}">
+                            {{=wednesday.title}}
+                        </a>
+                    {{else:}}
+                        Noch kein Plan vorhanden
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and thursday:}}
+                        <a href = "{{=URL('showRecipe', args = thursday.id)}}">
+                            {{=thursday.title}}
+                        </a>
+                    {{else:}}
+                        Noch kein Plan vorhanden
+                    {{pass}}
+                </td>
+                <td>
+                   {{if usersWeekplan and friday:}}
+                        <a href = "{{=URL('showRecipe', args = friday.id)}}">
+                            {{=friday.title}}
+                        </a>
+                    {{else:}}
+                        Noch kein Plan vorhanden
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and saturday:}}
+                        <a href = "{{=URL('showRecipe', args = saturday.id)}}">
+                            {{=saturday.title}}
+                        </a>
+                    {{else:}}
+                        Noch kein Plan vorhanden
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and sunday:}}
+                        <a href = "{{=URL('showRecipe', args = sunday.id)}}">
+                            {{=sunday.title}}
+                        </a>
+                    {{else:}}
+                        Noch kein Plan vorhanden
+                    {{pass}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{if usersWeekplan and monday and monday.image != "":}}
+                        <a href = "{{=URL('showRecipe', args = monday.id)}}">
+                            <img src="{{=URL('default', 'download', args=monday.image)}}" class="listRecipeImage"/>
+                        </a>
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and tuesday and tuesday.image != "":}}
+                        <a href = "{{=URL('showRecipe', args = tuesday.id)}}">
+                            <img src="{{=URL('default', 'download', args=tuesday.image)}}" class="listRecipeImage"/>
+                        </a>
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and wednesday and wednesday.image != "":}}
+                        <a href = "{{=URL('showRecipe', args = wednesday.id)}}">
+                            <img src="{{=URL('default', 'download', args=wednesday.image)}}" class="listRecipeImage"/>
+                        </a>
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and thursday and thursday.image != "":}}
+                        <a href = "{{=URL('showRecipe', args = thursday.id)}}">
+                            <img src="{{=URL('default', 'download', args=thursday.image)}}" class="listRecipeImage"/>
+                        </a>
+                    {{pass}}
+                </td>
+                <td>
+                   {{if usersWeekplan and friday and friday.image != "":}}
+                        <a href = "{{=URL('showRecipe', args = friday.id)}}">
+                            <img src="{{=URL('default', 'download', args=friday.image)}}" class="listRecipeImage"/>
+                        </a>
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and saturday and saturday.image != "":}}
+                        <a href = "{{=URL('showRecipe', args = saturday.id)}}">
+                            <img src="{{=URL('default', 'download', args=saturday.image)}}" class="listRecipeImage"/>
+                        </a>
+                    {{pass}}
+                </td>
+                <td>
+                    {{if usersWeekplan and sunday and sunday.image != "":}}
+                        <a href = "{{=URL('showRecipe', args = sunday.id)}}">
+                            <img src="{{=URL('default', 'download', args=sunday.image)}}" class="listRecipeImage"/>
+                        </a>
+                    {{pass}}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <button class="mainButton">
+        Speichern
+    </button>
+
+</form>
+
+
+<a href="{{=URL('showWeekplan')}}">
+    <button class="mainButton">
+        Abbrechen
+    </button>
+</a>
+
+<script src="{{=URL('static', 'js/jquery.js')}}" type="text/javascript"></script>
