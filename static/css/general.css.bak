@@ -6,7 +6,7 @@ h1 {
     color: #22cb01;
     font-weight: bold;
     padding: 0 0 20 0;
-}
+
 
 h2 {
     color: black;
@@ -16,6 +16,7 @@ h2 {
 
 .listTable {
     padding: 50 50 50 50 ;
+
 }
 
 
@@ -23,6 +24,7 @@ th, td {
     padding: 15px;
     text-align: left;
     word-wrap: break-word:
+
 }
 
 tr:nth-child(even) {
@@ -77,6 +79,7 @@ tr:nth-child(odd) {
 
 .listRecipeImage {
     width: 200px;
+
     height: auto;
 }
 

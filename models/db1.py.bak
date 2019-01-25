@@ -39,6 +39,7 @@ db.define_table('item',
 
 
 db.define_table('recipe',
+
                 Field('writer', 'reference auth_user', default = auth.user, writable = False, readable = False),
                 Field('category', 'reference category', label = 'Kategorie'),
                 Field('difficulty', 'reference difficulty', label = 'Schwierigkeit', orderby = 'difficulty.id'),

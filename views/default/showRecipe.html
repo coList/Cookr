@@ -7,7 +7,9 @@
 
 {{if auth.user:}}
 {{if recipe.writer.id == auth.user.id:}}
+
 <a href="{{=URL('editRecipe', args=recipe.id)}}">
+
     <button class="mainButton">
         Bearbeiten
     </button>
@@ -16,6 +18,7 @@
     <button class="mainButton">
         Löschen
     </button>
+
 {{pass}}
 {{pass}}
 {{if recipe.description is not "":}}
@@ -65,7 +68,9 @@
 </div>
 {{if recipe.image != "":}}
     <img src="{{=URL('default', 'download', args=recipe.image)}}" class="showRecipeImage"/>
+
 {{pass}}
+
 
 <h2>
     Benötigte Zutaten:
@@ -84,12 +89,14 @@
 </div>
 
 
+
 <a href="{{=URL('addToWeekplan', args=recipe.id)}}">
     <button class="mainButton">
         Zu meinem Wochenplan hinzufügen
     </button>
 </a>
 {{pass}}
+
     
         
 </div>

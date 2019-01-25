@@ -16,13 +16,16 @@ h2 {
 
 .listTable {
     padding: 50 50 50 50 ;
+
 }
 
 
 th, td {
     padding: 15px;
     text-align: left;
+
     word-wrap: break-word:
+
 }
 
 tr:nth-child(even) {

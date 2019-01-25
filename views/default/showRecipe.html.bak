@@ -12,7 +12,6 @@
         Bearbeiten
     </button>
 </a>
-    
     <button class="mainButton">
         Löschen
     </button>
@@ -41,7 +40,9 @@
     <b>Kosten: </b> {{=recipe.priceCategory.name}}
 </p>
 
+
 {{if recipe.category != None:}}
+
 <p>
     <b>Kategorie: </b> {{=recipe.category.name}}
 </p>
@@ -83,13 +84,13 @@
 {{=XML(recipe.instructions.replace('\n','<br />'))}} 
 </div>
 
-
 <a href="{{=URL('addToWeekplan', args=recipe.id)}}">
     <button class="mainButton">
         Zu meinem Wochenplan hinzufügen
     </button>
 </a>
 {{pass}}
+
     
         
 </div>

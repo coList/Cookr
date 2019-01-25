@@ -5,7 +5,6 @@
 # -------------------------------------------------------------------------
 from pydal.helpers.methods import smart_query
 
-
 # TODO: 
 # Wochenplan bearbeiten ermöglichen
 # Rezepte zu Wochenplan hinzufügen

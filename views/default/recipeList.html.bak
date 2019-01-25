@@ -3,7 +3,9 @@
     Rezepte
 </h1>
 
+
 <table>
+
     <tfoot>
         {{for row in recipes:}}
         <tr>
