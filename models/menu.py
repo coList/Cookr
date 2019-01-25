@@ -7,8 +7,6 @@
 
 response.menu = [
     (T('Home'), False, URL('default', 'index'), []),
-    (T('Eigene Rezepte verwalten'), False, URL('default', 'manageRecipes'), []),
-    (T('Neues Rezept'), False, URL('default', 'newRecipe'), []),
     (T('Rezepte von A bis Z'), False, URL('default', 'recipeList', args = (0)), [])
 ]
 
@@ -25,3 +23,10 @@ for row in db(db.origin).select():
     origins.append((T(row.name), False, URL('default', 'originRecipeList', args = (row.id, 0)), []))
     
 response.menu.append((T('Rezepte nach Herkunftsland'), False, None, origins))
+
+#Menu-Item: "Mein Cookr"    ----> Jetzt in layout.html  
+#myCookr = []
+#myCookr.append((T('Neues Rezept'), False, URL('default', 'newRecipe'), []))
+#myCookr.append((T('Meine Rezepte'), False, URL('default', 'manageRecipes'), []))
+#myCookr.append((T('Mein Wochenplan'), False, URL('default', 'showWeekplan'), [])
+#response.menu.append((T('Mein Cookr'), False, None, myCookr))

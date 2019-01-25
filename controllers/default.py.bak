@@ -3,7 +3,22 @@
 # This is a sample controller
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
+from pydal.helpers.methods import smart_query
 
+
+# TODO: 
+# Wochenplan bearbeiten ermöglichen
+# Rezepte zu Wochenplan hinzufügen
+# Rezepte im Wochenplan anzeigen (Bild + Link zu Rezept)
+# Rezepte: Schritte als einzelne Steps anlegen
+# Styling 
+# Haushalte statt einzelnen Nutzern
+# Rezepte aus Wochenplan löschen, wenn Tag vorbei
+# Meine Rezepte schöne Anzeige
+# Profilbereich und meinCookr an eine Stelle
+# Passwort vergessen nach Login weg
+# Login, etc: Sprache Deutsch
+# Schönes/ Sinnvolles Home
 
 
     
@@ -11,15 +26,90 @@
 def index():
     return locals()
 
+#http://hostname/Cookr/default/addToWeekplan/<recipe_id>
+#add a recipe to your weekplan: choose at which day you want to cook it
+@auth.requires_login()
+@auth.requires_login()
+def addToWeekplan():
+    id = request.args(0, cast=int)
+    
+    if (request.vars.weekday):
+        day = request.vars.weekday
+        #db(db.weekplan.household == auth.user.id).update(day = id)
+        
+        #no weekplan stored yet, insert new weekplan in database
+        if (db(db.weekplan.household == auth.user.id).isempty()):
+            db.weekplan.insert()
+            
+            
+        #store recipe in selected day
+        
+        if (day == 'monday'):
+            db(db.weekplan.household == auth.user.id).update(monday = id)
+        elif (day == 'tuesday'):
+            db(db.weekplan.household == auth.user.id).update(tuesday = id)
+        elif (day == 'wednesday'):
+            db(db.weekplan.household == auth.user.id).update(wednesday = id)
+        elif (day == 'thursday'):
+            db(db.weekplan.household == auth.user.id).update(thursday = id)
+        elif (day == 'friday'):
+            db(db.weekplan.household == auth.user.id).update(friday = id)
+        elif (day == 'saturday'):
+            db(db.weekplan.household == auth.user.id).update(saturday = id)
+        elif (day == 'sunday'):
+            db(db.weekplan.household == auth.user.id).update(sunday = id)
+
+
+        #if recipe was to add: redirect to showWeekplan
+        redirect(URL('showWeekplan'))
+
+    recipe = db.recipe(id)
+
+    usersWeekplan = db(db.weekplan.household == auth.user.id).select()
+
+
+    if usersWeekplan:
+        monday = usersWeekplan[0].monday
+        tuesday = usersWeekplan[0].tuesday
+        wednesday = usersWeekplan[0].wednesday
+        thursday = usersWeekplan[0].thursday
+        friday = usersWeekplan[0].friday
+        saturday = usersWeekplan[0].saturday
+        sunday = usersWeekplan[0].sunday
+
+    form=SQLFORM(db.weekplan).process()
+
+
+    return locals()
+
+
+# http://hostname/Cookr/default/showWeekplan
+# shows your weekplan: which recipes to cook on what day of the week
+@auth.requires_login()
+def showWeekplan():
+    usersWeekplan = db(db.weekplan.household == auth.user.id).select()
+   
+    if usersWeekplan:
+        monday = usersWeekplan[0].monday
+        tuesday = usersWeekplan[0].tuesday
+        wednesday = usersWeekplan[0].wednesday
+        thursday = usersWeekplan[0].thursday
+        friday = usersWeekplan[0].friday
+        saturday = usersWeekplan[0].saturday
+        sunday = usersWeekplan[0].sunday
+
+    return locals()
+
 # http://hostname/Cookr/default/newRecipe
 @auth.requires_login()
 def newRecipe():
     newRecipeForm = SQLFORM(db.recipe).process()
-    
+
     addIngredientForm = SQLFORM(db.recipeContainsIngredient).process()
-    
+
     currentIngredients = db(db.ingredient).select()
-    
+
+    newRecipeForm.element(_type='submit')['_class']='mainButton'
     #redirect to http://hostname/default/showRecipe/<recipe.id>
     if newRecipeForm.accepted: redirect(URL('showRecipe', args=(newRecipeForm.vars.id)))
     return locals()
@@ -27,17 +117,34 @@ def newRecipe():
 # http://hostname/Cookr/default/recipeList/<page>
 def recipeList():
     RECIPES_PER_PAGE = 5
-    
+
     page = request.args(0, cast=int)
-    
+
     startValue = page * RECIPES_PER_PAGE
     endValue = page * RECIPES_PER_PAGE + RECIPES_PER_PAGE
-    
-    categories = db(db.category).select()
+
     recipes = db(db.recipe).select(orderby=db.recipe.title, limitby=(startValue, endValue))
-    
-    
+
+
     #ingredients = db(db.ingredient).select()
+    return locals()
+
+
+
+
+
+# http://hostname/Cookr/default/search
+def search():
+    #list_of_searchable_fields = [db.category.name, db.origin.name, db.recipe.title]
+    #query = smart_query(list_of_searchable_fields, search_text)
+    #rows = db(query).select()
+
+    rows = []
+    searchKeyword = request.vars["search"]
+    if searchKeyword != None and searchKeyword != "":
+        list_of_searchable_fields = [db.recipe.title, db.category.name]
+        query = smart_query(list_of_searchable_fields, searchKeyword).select()
+        rows = db(query).select()
     return locals()
 
 # http://hostname/Cookr/default/categoryRecipeList/<categoryId>/<page>
@@ -69,7 +176,8 @@ def originRecipeList():
     
     recipes = db(db.recipe.origin == originId).select(orderby = db.recipe.title, limitby = (startValue, endValue))
     
-    originName = db(db.origin == originId).select()
+    origin = db(db.origin.id == originId).select()
+    originName = origin[0].name
     return locals()
 
 # http://hostname/Cookr/default/showIngredient/<ingredient.id>
@@ -81,8 +189,8 @@ def showIngredient():
 def showRecipe():
     recipe = db.recipe(request.args(0, cast=int))
     items = db(db.recipeContainsItem.recipe == recipe.id).select()
-    ingredients = db(db.recipeContainsIngredient.recipe == recipe.id).select()
-    steps = db(db.recipe_step.recipe == recipe.id).select(orderby = db.recipe_step.stepNumber)
+    #ingredients = db(db.recipeContainsIngredient.recipe == recipe.id).select()
+    #steps = db(db.recipe_step.recipe == recipe.id).select(orderby = db.recipe_step.stepNumber)
     return locals()
 
 
@@ -104,6 +212,8 @@ def editRecipe():
 def manageRecipes():
     recipesGrid = SQLFORM.grid(db.recipe.writer == auth.user.id)
     return locals()
+
+
 
 # ---- API (example) -----
 @auth.requires_login()

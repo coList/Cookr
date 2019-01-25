@@ -1,3 +1,18 @@
 {{extend 'layout.html'}}
-<h1>This is the default/editRecipe.html template</h1>
-{{=BEAUTIFY(response._vars)}}
+<h1>
+    Rezept bearbeiten
+</h1>
+{{=recipeForm.custom.begin}}
+Titel: <div>{{=recipeForm.custom.widget.title}}</div>
+Beschreibung: <div>{{=recipeForm.custom.widget.description}}</div>
+Zutaten: <div>{{=recipeForm.custom.widget.ingredients}}</div>
+Anleitung: <div>{{=recipeForm.custom.widget.instructions}}</div>
+Kategorie: <div>{{=recipeForm.custom.widget.category}}</div>
+Schwierigkeit: <div>{{=recipeForm.custom.widget.difficulty}}</div>
+Kosten: <div>{{=recipeForm.custom.widget.priceCategory}}</div>
+Herkunftsland: <div>{{=recipeForm.custom.widget.origin}}</div>
+Dauer: <div>{{=recipeForm.custom.widget.duration}}</div>
+Personenzahl: <div>{{=recipeForm.custom.widget.forAmountOfPeople}}</div>
+Titelbild: <div>{{=recipeForm.custom.widget.image}}</div>
+{{=form.custom.submit}}
+{{=form.custom.end}}
