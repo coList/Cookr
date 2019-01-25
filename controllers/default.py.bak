@@ -5,6 +5,19 @@
 # -------------------------------------------------------------------------
 from pydal.helpers.methods import smart_query
 
+# TODO: 
+# Wochenplan bearbeiten ermöglichen
+# Rezepte zu Wochenplan hinzufügen
+# Rezepte im Wochenplan anzeigen (Bild + Link zu Rezept)
+# Rezepte: Schritte als einzelne Steps anlegen
+# Styling 
+# Haushalte statt einzelnen Nutzern
+# Rezepte aus Wochenplan löschen, wenn Tag vorbei
+# Meine Rezepte schöne Anzeige
+# Profilbereich und meinCookr an eine Stelle
+# Passwort vergessen nach Login weg
+# Login, etc: Sprache Deutsch
+# Schönes/ Sinnvolles Home
 
 # TODO: 
 # Wochenplan bearbeiten ermöglichen
